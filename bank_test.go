@@ -5,8 +5,6 @@ import (
 	"testing"
 )
 
-
-
 func TestSetup(t *testing.T) {
 	accounts = append(accounts,
 		account{
@@ -15,17 +13,17 @@ func TestSetup(t *testing.T) {
 		},
 		account{
 			"Daisy",
-			20,
+			0,
 		},
 		account{
 			"Rose",
-			30,
+			0,
 		},
 	)
 	fmt.Println(accounts)
-	bankBalance = 100 //Total of account balances
 }
 
+// Deposit $50 into Alice's account
 func TestDeposit(t *testing.T) {
 	account, err := findAccount("Alice")
 	if err != nil {
@@ -35,17 +33,7 @@ func TestDeposit(t *testing.T) {
 	if transaction.account.balance !=  100 {
 		t.Errorf("got #{transaction.account.balance}; want 100")
 	}
-	if bankBalance !=  150 {
-		t.Errorf("Got #{bankBalance}; want 150")
-	}
 }
-
-
-
-
-
-
-
 
 func findAccount(customerName string) (account, error) {
 	for i := range accounts {
@@ -56,6 +44,14 @@ func findAccount(customerName string) (account, error) {
 
 	}
 	return account{"",0},fmt.Errorf("Account not found")
+}
+
+func TestBankBalance(t *testing.T) {
+	bankBalance := 0
+	bankBalance = findBankBalance(transactions)
+	if bankBalance !=  50 {
+		t.Errorf("got #{bankBalance}; want 50")
+	}
 }
 
 
