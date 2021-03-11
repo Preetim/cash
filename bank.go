@@ -30,6 +30,15 @@ func deposit(account account, amount int) transaction {
 	return t
 }
 
+func createAccount(customer string) account{
+	newAccount := account{
+		customer: customer,
+		balance: 0,
+	}
+	accounts = append(accounts,newAccount)
+	return newAccount
+}
+
 //func findBankBalance(transactions []transaction) int {
 //	bankBalance = 0
 //	for k, v := range transactions.account {

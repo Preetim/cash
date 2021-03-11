@@ -65,6 +65,12 @@ func findAccount(customerName string) (account, error) {
 	return account{"",0},fmt.Errorf("Account not found")
 }
 
+func TestCreateAccount(t *testing.T){
+	account := createAccount("Phil")
+	assert.Equal(t, account.customer, "Phil")
+	assert.Equal(t,account.balance,0)
+}
+
 //func TestBankBalance(t *testing.T) {
 //	accounts = append(accounts,
 //		account{
