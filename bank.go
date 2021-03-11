@@ -1,5 +1,9 @@
 package cash
 
+import (
+	"fmt"
+)
+
 type transaction struct {
 	transactionType string
 	amount int
@@ -36,15 +40,18 @@ func deposit(account account, amount int) transaction {
 //	return bankBalance
 //}
 
-func withdraw(account account, amount int) transaction {
+func withdraw(account account, amount int) (transaction, error) {
 	account.balance -= amount
 	t := transaction{
 		transactionType: "withdraw",
 		amount: amount,
 		account: account,
 	}
+	if account.balance < 0{
+		return t, fmt.Errorf("Insufficient funds")
+	}
 	transactions = append(transactions, t)
-	return t
+	return t, nil
 }
 
 

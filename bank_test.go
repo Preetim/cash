@@ -3,6 +3,7 @@ package cash
 import (
 	"fmt"
 	"testing"
+	//"github.com/stretchr/testify/assert"
 )
 
 //func TestSetup(t *testing.T) {
@@ -37,6 +38,7 @@ func TestDeposit(t *testing.T) {
 	transaction := deposit(account, 50)
 	if transaction.account.balance !=  100 {
 		t.Errorf("got #{transaction.account.balance}; want 100")
+
 	}
 }
 
@@ -47,16 +49,39 @@ func TestWithdraw(t *testing.T) {
 			50,
 		},
 	)
-		account, err := findAccount("Alice")
+	account, err := findAccount("Alice")
 	if err != nil {
 		t.Fatal("expected no error got", err)
 	}
-	transaction := withdraw(account,40)
+	transaction, error := withdraw(account,40)
+	if error != nil {
+		fmt.Printf("errored")
+	}
 	if transaction.account.balance !=  10 {
 		t.Errorf("got #{transaction.account.balance}; want 10")
 	}
 
 }
+
+//func TestWithdrawInsufficientBalance(t *testing.T) {
+//	accounts = append(accounts,
+//		account{
+//			"Alice",
+//			50,
+//		},
+//	)
+//	account, err := findAccount("Alice")
+//	if err != nil {
+//		t.Fatal("expected no error got", err)
+//	}
+//	transaction, error := withdraw(account,60)
+//	if error != nil {
+//		t.Errorf("expected no error got %s", error)
+//	}
+//	if transaction.account.balance !=  10 {
+//		t.Errorf("got #{transaction.account.balance}; want 10")
+//	}
+//}
 
 func findAccount(customerName string) (account, error) {
 	for i := range accounts {
