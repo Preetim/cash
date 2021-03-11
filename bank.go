@@ -43,7 +43,6 @@ func findBankBalance(accounts []account) int {
 	bankBalance = 0
 	for i := range accounts {
 		bankBalance = accounts[i].balance + bankBalance
-		fmt.Println(accounts[i])
 	}
 	return bankBalance
 }

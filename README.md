@@ -1,7 +1,28 @@
-# cash
+## cash coding exercise
 
-## Install Go 
+### Running tests instructions
 
-Just use the Download and install steps from `https://golang.org/doc/install`
+There are 2 ways you can run this code. 
+1. Docker
+You need to install docker and `run docker build ../cash`
+   
+2. Using your local setup. 
+Install go [here](https://golang.org/doc/install) . Once done run `go test`
 
+   
+### Design Concepts
 
+This bank is made of accounts and transactions. Accounts have names and amounts for each customer. Every time a deposit or withdraw is done, the record is written in as a transaction and then the amount is reflected in the customer's account.
+Transactions form a kind of ledger for the bank. 
+In an ideal world the bank balance calculation and transactions would be events which would run as scheduled to create settlement files.
+
+   ###Data Model 
+Data model is very simple as shown below.
+
+![img_1.png](img_1.png)
+
+### Trade Offs/Assumptions
+- All amounts are represented in cents and hence the type is integers.
+- No concept of time or currency shown for this code.
+- Race conditions for withdraws would need better handling with DBs and locking perhaps
+- The id fields in the data model arent in this code. They'd be primary keys in a DB.
