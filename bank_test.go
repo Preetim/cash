@@ -2,47 +2,29 @@ package cash
 
 import (
 	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
-	//"github.com/stretchr/testify/assert"
 )
-
-//func TestSetup(t *testing.T) {
-//	accounts = append(accounts,
-//		account{
-//			"Alice",
-//			50,
-//		},
-//		account{
-//			"Daisy",
-//			0,
-//		},
-//		account{
-//			"Rose",
-//			0,
-//		},
-//	)
-//	fmt.Println(accounts)
-//}
 
 // Deposit $50 into Alice's account
 func TestDeposit(t *testing.T) {
+	//setup data
 	accounts = append(accounts,
 		account{
 			"Alice",
 			50,
-	},)
+		},
+	)
 	account, err := findAccount("Alice")
 	if err != nil {
 		t.Fatal("expected no error got", err)
 	}
 	transaction := deposit(account, 50)
-	if transaction.account.balance !=  100 {
-		t.Errorf("got #{transaction.account.balance}; want 100")
-
-	}
+	assert.Equal(t, transaction.account.balance,100)
 }
 
 func TestWithdraw(t *testing.T) {
+	//setup data
 	accounts = append(accounts,
 		account{
 			"Alice",
@@ -54,41 +36,31 @@ func TestWithdraw(t *testing.T) {
 		t.Fatal("expected no error got", err)
 	}
 	transaction, error := withdraw(account,40)
-	if error != nil {
-		fmt.Printf("errored")
-	}
-	if transaction.account.balance !=  10 {
-		t.Errorf("got #{transaction.account.balance}; want 10")
-	}
-
+	assert.Equal(t, transaction.account.balance,10)
+	assert.NotEqual(t, error,"%s")
 }
 
-//func TestWithdrawInsufficientBalance(t *testing.T) {
-//	accounts = append(accounts,
-//		account{
-//			"Alice",
-//			50,
-//		},
-//	)
-//	account, err := findAccount("Alice")
-//	if err != nil {
-//		t.Fatal("expected no error got", err)
-//	}
-//	transaction, error := withdraw(account,60)
-//	if error != nil {
-//		t.Errorf("expected no error got %s", error)
-//	}
-//	if transaction.account.balance !=  10 {
-//		t.Errorf("got #{transaction.account.balance}; want 10")
-//	}
-//}
+func TestWithdrawInsufficientBalance(t *testing.T) {
+	accounts = append(accounts,
+		account{
+			"Alice",
+			50,
+		},
+	)
+	account, err := findAccount("Alice")
+	if err != nil {
+		t.Fatal("expected no error got", err)
+	}
+	transaction, error := withdraw(account,60)
+	assert.Errorf(t, error,"%s")
+	assert.NotEqual(t, transaction.account.balance, 10)
+}
 
 func findAccount(customerName string) (account, error) {
 	for i := range accounts {
 		if accounts[i].customer == customerName {
 			return accounts[i],nil
 		}
-
 	}
 	return account{"",0},fmt.Errorf("Account not found")
 }
@@ -109,6 +81,25 @@ func findAccount(customerName string) (account, error) {
 //	if bankBalance !=  100 {
 //		t.Errorf("got #{bankBalance}; want 100")
 //	}
+//}
+
+
+//func TestSetup(t *testing.T) {
+//	accounts = append(accounts,
+//		account{
+//			"Alice",
+//			50,
+//		},
+//		account{
+//			"Daisy",
+//			0,
+//		},
+//		account{
+//			"Rose",
+//			0,
+//		},
+//	)
+//	fmt.Println(accounts)
 //}
 
 
