@@ -6,6 +6,22 @@ import (
 	"testing"
 )
 
+func TestBankBalance(t *testing.T) {
+	accounts = append(accounts,
+		account{
+			"Alice",
+			50,
+		},
+		account{
+			"Daisy",
+			50,
+		},
+	)
+	bankBalance := 0
+	bankBalance = findBankBalance(accounts)
+	assert.Equal(t,100,bankBalance)
+}
+
 // Deposit $50 into Alice's account
 func TestDeposit(t *testing.T) {
 	//setup data
@@ -71,23 +87,7 @@ func TestCreateAccount(t *testing.T){
 	assert.Equal(t,account.balance,0)
 }
 
-//func TestBankBalance(t *testing.T) {
-//	accounts = append(accounts,
-//		account{
-//			"Alice",
-//			50,
-//			},
-//		account{
-//			"Daisy",
-//			50,
-//			},
-//		)
-//	bankBalance := 0
-//	bankBalance = findBankBalance(transactions)
-//	if bankBalance !=  100 {
-//		t.Errorf("got #{bankBalance}; want 100")
-//	}
-//}
+
 
 
 //func TestSetup(t *testing.T) {

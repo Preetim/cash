@@ -39,15 +39,15 @@ func createAccount(customer string) account{
 	return newAccount
 }
 
-//func findBankBalance(transactions []transaction) int {
-//	bankBalance = 0
-//	for k, v := range transactions.account {
-//		//fmt.Printf("Key is %d\n", k)
-//		bankBalance += v.amount
-//	}
-//	fmt.Printf("bankBalance is %d\n", bankBalance)
-//	return bankBalance
-//}
+func findBankBalance(accounts []account) int {
+	bankBalance = 0
+	for i := range accounts {
+		bankBalance = accounts[i].balance + bankBalance
+		fmt.Println(accounts[i])
+	}
+	return bankBalance
+}
+
 
 func withdraw(account account, amount int) (transaction, error) {
 	account.balance -= amount
