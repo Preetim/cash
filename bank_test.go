@@ -13,7 +13,7 @@ func TestDeposit(t *testing.T) {
 		50,
 	}
 	account = deposit(account, 50)
-	assert.Equal(t, 100, account.balance)
+	assert.Equal(t, 150, account.balance)
 }
 
 func TestWithdrawInsufficientBalance(t *testing.T) {
@@ -69,37 +69,3 @@ func TestLedger(t *testing.T){
 	bankBalance = printLedgerAndShowBalance()
 	assert.Equal(t, bankBalance, 200)
 }
-
-//func TestDoubleDeposit(t *testing.T){
-//	accounts = append(accounts,
-//		account{
-//			"Sarah",
-//			0,
-//		},
-//	)
-//	account, err := findOrCreateAccounts("Sarah")
-//	if err != nil {
-//		t.Fatal("expected no error got", err)
-//	}
-//	transaction := deposit(account, 50)
-//	transaction := deposit(account, 50)
-//	assert.Equal(t, 100,transaction.account.balance)
-//}
-
-//func TestSetup(t *testing.T) {
-//	accounts = append(accounts,
-//		account{
-//			"Alice",
-//			50,
-//		},
-//		account{
-//			"Daisy",
-//			0,
-//		},
-//		account{
-//			"Rose",
-//			0,
-//		},
-//	)
-//	fmt.Println(accounts)
-//}
