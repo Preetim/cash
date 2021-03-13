@@ -8,4 +8,3 @@ RUN go mod download
 ENV CGO_ENABLED=0
 RUN go build
 RUN go test
-CMD []
