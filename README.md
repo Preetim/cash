@@ -2,12 +2,16 @@
 
 ### Running tests instructions
 
-There are 2 ways you can run this code. 
-1. Docker
-You need to install docker and `run docker build ../cash`
+There are 2 ways you can run this code;
+1. Docker:
+You need to install docker and run this command in your project folder.
    
-2. Using your local setup. 
-Install go [here](https://golang.org/doc/install) . Once done run `go test`
+    - `cd cash`   
+    - `run docker build ../cash`
+   
+2. Using your local setup:
+[Install go](https://golang.org/doc/install),
+   once done run `go test` in your project folder
 
    
 ### Design Concepts

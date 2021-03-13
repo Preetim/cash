@@ -6,6 +6,6 @@ WORKDIR /app
 COPY . .
 RUN go mod download
 ENV CGO_ENABLED=0
-RUN go build -o main .
+RUN go build
 RUN go test
 CMD []
