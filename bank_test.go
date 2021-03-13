@@ -6,8 +6,6 @@ import (
 	"testing"
 )
 
-
-
 // Deposit $50 into Alice's account
 func TestDeposit(t *testing.T) {
 	account := account{
@@ -39,8 +37,6 @@ func TestWithdraw(t *testing.T) {
 	assert.NotEqual(t, error, "%s")
 }
 
-
-
 func TestFindOrCreateAccount(t *testing.T){
 	//test create account
 	account, error := findOrCreateAccounts("Jane",0)
@@ -69,42 +65,26 @@ func TestEndtoEndWorkflow(t *testing.T){
 	assert.Errorf(t,error,"Actual %s" )
 }
 
-
-func TestBankBalance(t *testing.T) {
-	accounts = append(accounts,
-		account{
-			"Alice",
-			50,
-		},
-		account{
-			"Daisy",
-			50,
-		},
-	)
-	bankBalance := 0
-	bankBalance = findBankBalance(accounts)
-	assert.Equal(t,100,bankBalance)
-}
-
 func TestLedger(t *testing.T){
-	printLedger();
+	bankBalance = printLedgerAndShowBalance()
+	assert.Equal(t, bankBalance, 200)
 }
 
-////func TestDoubleDeposit(t *testing.T){
-////	accounts = append(accounts,
-////		account{
-////			"Sarah",
-////			0,
-////		},
-////	)
-////	account, err := findAccount("Alice")
-////	if err != nil {
-////		t.Fatal("expected no error got", err)
-////	}
-////	transaction := deposit(account, 50)
-////	transaction := deposit(account, 50)
-////	assert.Equal(t, 100,transaction.account.balance)
-////}
+//func TestDoubleDeposit(t *testing.T){
+//	accounts = append(accounts,
+//		account{
+//			"Sarah",
+//			0,
+//		},
+//	)
+//	account, err := findOrCreateAccounts("Sarah")
+//	if err != nil {
+//		t.Fatal("expected no error got", err)
+//	}
+//	transaction := deposit(account, 50)
+//	transaction := deposit(account, 50)
+//	assert.Equal(t, 100,transaction.account.balance)
+//}
 //
 //
 //
@@ -126,12 +106,3 @@ func TestLedger(t *testing.T){
 ////	)
 ////	fmt.Println(accounts)
 ////}
-//
-//
-//
-//
-
-
-
-
-

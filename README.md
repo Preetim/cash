@@ -23,16 +23,11 @@ Data model is very simple as shown below.
 
 ### Trade Offs/Assumptions
 - All amounts are represented in cents and hence the type is integers.
-- No concept of time or currency shown for this code.
-- Race conditions for withdraws would need better handling with DBs and locking perhaps
+- No concept of time or currency or statuses shown for this code.
 - The id fields in the data model arent in this code. They'd be primary keys in a DB.
-- I'd liked to have stored status for every transaction
 
 
 Pending items --- delete before submission
 
 Error handling
-Scopes in tests
-
-Do create or find account with balance
-Then return accounts in deposit and withdraws
+do find or create with Sarah's account not name

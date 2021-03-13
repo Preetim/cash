@@ -2,7 +2,6 @@ package cash
 
 import (
 	"fmt"
-	"log"
 )
 
 type transaction struct {
@@ -32,21 +31,10 @@ func deposit(account account, amount int) account {
 	return account
 }
 
-
-func findBankBalance(accounts []account) int {
-	bankBalance = 0
-	for i := range accounts {
-		bankBalance = accounts[i].balance + bankBalance
-	}
-	return bankBalance
-}
-
-
 func withdraw(account account, amount int) (account, error) {
 	account, _ = findOrCreateAccounts(account.customer, account.balance)
 	if account.balance < amount{
 		return account, fmt.Errorf("Insufficient funds")
-		log.Fatal("No funds")
 	}
 	account.balance -= amount
 	t := transaction{
@@ -80,25 +68,12 @@ func findOrCreateAccounts(customerName string, balance int) (account, error) {
 	return a, nil
 }
 
-func printLedger(){
+func printLedgerAndShowBalance() int {
+	bankBalance := 0
 	for i := range transactions {
+		bankBalance += transactions[i].account.balance
 		fmt.Println(transactions[i])
 	}
+	fmt.Printf("Total bank balance EOD is %d", bankBalance)
+	return bankBalance
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
