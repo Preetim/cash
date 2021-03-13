@@ -1,4 +1,4 @@
-## cash coding exercise
+## Cash coding exercise
 
 ### Running tests instructions
 
@@ -26,3 +26,13 @@ Data model is very simple as shown below.
 - No concept of time or currency shown for this code.
 - Race conditions for withdraws would need better handling with DBs and locking perhaps
 - The id fields in the data model arent in this code. They'd be primary keys in a DB.
+- I'd liked to have stored status for every transaction
+
+
+Pending items --- delete before submission
+
+Error handling
+Scopes in tests
+
+Do create or find account with balance
+Then return accounts in deposit and withdraws

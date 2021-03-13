@@ -2,6 +2,7 @@ package cash
 
 import (
 	"fmt"
+	"log"
 )
 
 type transaction struct {
@@ -19,7 +20,8 @@ var accounts []account
 var transactions []transaction
 var bankBalance int = 0
 
-func deposit(account account, amount int) transaction {
+func deposit(account account, amount int) account {
+	account, _ = findOrCreateAccounts(account.customer, account.balance)
 	account.balance += amount
 	t := transaction{
 		transactionType: "deposit",
@@ -27,17 +29,9 @@ func deposit(account account, amount int) transaction {
 		account: account,
 	}
 	transactions = append(transactions, t)
-	return t
+	return account
 }
 
-func createAccount(customer string) account{
-	newAccount := account{
-		customer: customer,
-		balance: 0,
-	}
-	accounts = append(accounts,newAccount)
-	return newAccount
-}
 
 func findBankBalance(accounts []account) int {
 	bankBalance = 0
@@ -48,20 +42,49 @@ func findBankBalance(accounts []account) int {
 }
 
 
-func withdraw(account account, amount int) (transaction, error) {
+func withdraw(account account, amount int) (account, error) {
+	account, _ = findOrCreateAccounts(account.customer, account.balance)
+	if account.balance < amount{
+		return account, fmt.Errorf("Insufficient funds")
+		log.Fatal("No funds")
+	}
 	account.balance -= amount
 	t := transaction{
 		transactionType: "withdraw",
 		amount: amount,
 		account: account,
 	}
-	if account.balance < 0{
-		return t, fmt.Errorf("Insufficient funds")
-	}
 	transactions = append(transactions, t)
-	return t, nil
+	return account, nil
 }
 
+func findOrCreateAccounts(customerName string, balance int) (account, error) {
+	a :=account{
+		customer: customerName,
+		balance: balance,
+	}
+	for i := range accounts {
+		if accounts[i].customer == customerName {
+			accounts[i].balance = balance
+			a = accounts[i]
+			//return accounts[i], nil
+		} else {
+			newAccount := account{
+				customer: customerName,
+				balance:  0,
+			}
+			a = newAccount
+			accounts = append(accounts, a)
+		}
+	}
+	return a, nil
+}
+
+func printLedger(){
+	for i := range transactions {
+		fmt.Println(transactions[i])
+	}
+}
 
 
 
