@@ -4,10 +4,8 @@
 
 There are 2 ways you can run this code;
 1. Docker:
-You need to install docker and run this command in your project folder.
-   
-    - `cd cash`   
-    - `run docker build ../cash`
+You need to install docker and run this command
+ `docker build .`
    
 2. Using your local setup:
 [Install go](https://golang.org/doc/install),
@@ -29,9 +27,3 @@ Data model is very simple as shown below.
 - All amounts are represented in cents and hence the type is integers.
 - No concept of time or currency or statuses shown for this code.
 - The id fields in the data model arent in this code. They'd be primary keys in a DB.
-
-
-Pending items --- delete before submission
-
-Error handling
-do find or create with Sarah's account not name

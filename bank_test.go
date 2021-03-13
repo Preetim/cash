@@ -85,24 +85,21 @@ func TestLedger(t *testing.T){
 //	transaction := deposit(account, 50)
 //	assert.Equal(t, 100,transaction.account.balance)
 //}
-//
-//
-//
-//
-////func TestSetup(t *testing.T) {
-////	accounts = append(accounts,
-////		account{
-////			"Alice",
-////			50,
-////		},
-////		account{
-////			"Daisy",
-////			0,
-////		},
-////		account{
-////			"Rose",
-////			0,
-////		},
-////	)
-////	fmt.Println(accounts)
-////}
+
+//func TestSetup(t *testing.T) {
+//	accounts = append(accounts,
+//		account{
+//			"Alice",
+//			50,
+//		},
+//		account{
+//			"Daisy",
+//			0,
+//		},
+//		account{
+//			"Rose",
+//			0,
+//		},
+//	)
+//	fmt.Println(accounts)
+//}
