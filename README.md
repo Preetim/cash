@@ -18,7 +18,7 @@ This bank is made of accounts and transactions. Accounts have names and amounts 
 Transactions form a kind of ledger for the bank. 
 In an ideal world the bank balance calculation and transactions would be events which would run as scheduled to create settlement files.
 
-   ###Data Model 
+### Data Model 
 Data model is very simple as shown below.
 
 ![img_1.png](img_1.png)
@@ -27,3 +27,4 @@ Data model is very simple as shown below.
 - All amounts are represented in cents and hence the type is integers.
 - No concept of time or currency or statuses shown for this code.
 - The id fields in the data model arent in this code. They'd be primary keys in a DB.
+- Concurrency & race conditiona arent handled 
