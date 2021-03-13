@@ -16,13 +16,15 @@ func TestDepositWithBalance(t *testing.T) {
 	assert.Equal(t, 100, account.balance)
 }
 
+//Deposit money into a new customer's account
 func TestNewDeposit(t *testing.T){
 	var a account
-	a.customer = "Omaya"
+	a.customer = "Omaru"
 	a = deposit(a,10)
 	assert.Equal(t, 10,a.balance)
 }
 
+//Withdraw insufficient balance 60 from 50 balance
 func TestWithdrawInsufficientBalance(t *testing.T) {
 	account := account{
 		"Maya",
@@ -33,6 +35,7 @@ func TestWithdrawInsufficientBalance(t *testing.T) {
 	assert.NotEqual(t, account.balance, -10)
 }
 
+//Test withdraw 10 from 50
 func TestWithdraw(t *testing.T) {
 	account := account{
 		"Daisy",
@@ -43,6 +46,7 @@ func TestWithdraw(t *testing.T) {
 	assert.NotEqual(t, error, "%s")
 }
 
+//Test withdraw from 0 balance
 func TestWithdrawFromZeroBalance(t *testing.T){
 	var a account
 	a, error := withdraw(a, 5)
@@ -50,6 +54,7 @@ func TestWithdrawFromZeroBalance(t *testing.T){
 	assert.Errorf(t, error,"%s")
 }
 
+//Test new accounts and finding existing accounts
 func TestFindOrCreateAccount(t *testing.T){
 	//test create account
 	account, error := findOrCreateAccounts("Jane",0)
@@ -64,6 +69,7 @@ func TestFindOrCreateAccount(t *testing.T){
 	assert.Equal(t, account.balance, 50)
 }
 
+//Test deposit, withdraw and then withdraw with insufficient funds
 func TestEndtoEndWorkflow(t *testing.T){
 	account := account{
 		"Marley",
@@ -78,7 +84,8 @@ func TestEndtoEndWorkflow(t *testing.T){
 	assert.Errorf(t,error,"Actual %s" )
 }
 
-func TestLedgerAndPrintSettlementFile(t *testing.T){
+//Test end of day settlement files and bank balance. In a real world this is an output every day for banks
+func TestBankBalanceAndPrintSettlementFile(t *testing.T){
 	bankBalance = printLedgerAndShowBalance()
 	assert.Equal(t, bankBalance, 210)
 }

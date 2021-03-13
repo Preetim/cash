@@ -69,7 +69,6 @@ func findOrCreateAccounts(customerName string, balance int) (account, error) {
 }
 
 func printLedgerAndShowBalance() int {
-	bankBalance := 0
 	for i := range transactions {
 		bankBalance += transactions[i].account.balance
 		fmt.Println(transactions[i])
