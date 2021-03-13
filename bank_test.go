@@ -78,7 +78,7 @@ func TestEndtoEndWorkflow(t *testing.T){
 	assert.Errorf(t,error,"Actual %s" )
 }
 
-func TestLedgerAndPrintSettltmentFile(t *testing.T){
+func TestLedgerAndPrintSettlementFile(t *testing.T){
 	bankBalance = printLedgerAndShowBalance()
 	assert.Equal(t, bankBalance, 210)
 }
