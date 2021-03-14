@@ -2,7 +2,6 @@ package cash
 
 import (
 	"github.com/stretchr/testify/assert"
-	"log"
 	"testing"
 )
 
@@ -18,10 +17,13 @@ func TestDepositWithBalance(t *testing.T) {
 
 //Deposit money into a new customer's account
 func TestNewDeposit(t *testing.T){
-	var a account
-	a.customer = "Omaru"
-	a = deposit(a,10)
-	assert.Equal(t, 10,a.balance)
+	//var a account
+	account := account{
+		"Alice",
+		0,
+	}
+	account = deposit(account,10)
+	assert.Equal(t, 10,account.balance)
 }
 
 //Withdraw insufficient balance 60 from 50 balance
@@ -49,24 +51,10 @@ func TestWithdraw(t *testing.T) {
 //Test withdraw from 0 balance
 func TestWithdrawFromZeroBalance(t *testing.T){
 	var a account
+	a.customer = "Rini"
 	a, error := withdraw(a, 5)
 	assert.Equal(t, 0, a.balance)
 	assert.Errorf(t, error,"%s")
-}
-
-//Test new accounts and finding existing accounts
-func TestFindOrCreateAccount(t *testing.T){
-	//test create account
-	account, error := findOrCreateAccounts("Jane",0)
-	if error != nil {
-		log.Fatal(error)
-	}
-	assert.Equal(t,account.customer,"Jane")
-	assert.Equal(t, account.balance, 0)
-	//test find account
-	account, error = findOrCreateAccounts("Jane",50)
-	assert.Equal(t,account.customer,"Jane")
-	assert.Equal(t, account.balance, 50)
 }
 
 //Test deposit, withdraw and then withdraw with insufficient funds
@@ -84,8 +72,37 @@ func TestEndtoEndWorkflow(t *testing.T){
 	assert.Errorf(t,error,"Actual %s" )
 }
 
+func TestBankBalance(t *testing.T){
+	accounts = [] account{
+		{
+			"Daisy",
+			50,
+		},
+		{
+			"Mor",
+			70,
+		},
+	}
+	bankBalance = calculateBankBalance()
+	assert.Equal(t, 120,bankBalance)
+}
+
+func TestFindAccount(t *testing.T){
+	accounts = [] account{
+		{
+			"Daisy",
+			50,
+		},
+		{
+			"Mor",
+			70,
+		},
+	}
+	account := findAccount("Mor")
+	assert.Equal(t, "Mor",account.customer)
+}
+
 //Test end of day settlement files and bank balance. In a real world this is an output every day for banks
-func TestBankBalanceAndPrintSettlementFile(t *testing.T){
-	bankBalance = printLedgerAndShowBalance()
-	assert.Equal(t, bankBalance, 210)
+func TestPrintSettlementFile(t *testing.T){
+	printLedger()
 }
