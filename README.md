@@ -27,4 +27,6 @@ Data model is very simple as shown below.
 - All amounts are represented in cents and hence the type is integers.
 - No concept of time or currency or statuses shown for this code.
 - The id fields in the data model arent in this code. They'd be primary keys in a DB.
-- Concurrency & race conditions arent handled 
+- I havent handled concurrency in this code. I'd be implementing optimistic locking in the DB with manual retries
+- Would implement auto-retries for transient failures like app not available, maybe with the help of queues and helpers
+- Transactions would be backed up regularly in case the primary DB fails to ensure no money is lost for the bank
